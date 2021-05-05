@@ -57,4 +57,4 @@ create TABLE cuotas(
     PRIMARY KEY (id),
     CONSTRAINT Fk_prestamoId FOREIGN KEY(prestamoId)
     REFERENCES prestamos (id)  
-);
+);l
