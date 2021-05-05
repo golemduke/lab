@@ -1,0 +1,60 @@
+create TABLE usuarios(
+    id int NOT null AUTO_INCREMENT,
+    cedula varchar(15) not NULL, 
+	nombre varchar(50) NOT NULL,
+    apellido varchar(50) NOT NULL,
+	telefono int NOT null,
+    contraseña varchar(15) NOT NULL,
+    tipo varchar(15) NOT NULL,
+    PRIMARY KEY (id) 
+);
+create TABLE rutas(
+    id int NOT null AUTO_INCREMENT,
+    capitalInicial double not NULL, 
+	fechaInicio date NOT NULL,
+    usuariosId int NOT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT Fk_usuariosId FOREIGN KEY(usuariosId)
+    REFERENCES usuarios (id)
+);
+create TABLE clientes(
+    id int NOT null AUTO_INCREMENT,
+    cedula varchar(15) NOT null,
+    nombre varchar(50) NOT null,
+    apellido varchar(50) NOT null,
+    direccion varchar(120) NOT null,
+    telefono varchar(20) NOT null,
+    rutasId int NOT null,
+    PRIMARY KEY (id),
+    CONSTRAINT Fk_rutasId FOREIGN KEY(rutasId)
+    REFERENCES rutas (id)
+);
+create TABLE tiposDePrestamo(
+    id int NOT null AUTO_INCREMENT,
+    nombre varchar(50) NOT null,
+    PRIMARY KEY (id)   
+);
+create TABLE prestamos(
+    id int NOT null AUTO_INCREMENT,
+    montoPrestamo double NOT null,
+    interes int NOT null,
+    fechaInicio date NOT null,
+    fechaFin date NOT null,
+    cantCuotas int NOT null,
+    clientesId int NOT null,
+    tiposDePrestamoId int NOT null,
+    PRIMARY KEY (id),
+    CONSTRAINT Fk_clientesId FOREIGN KEY(clientesId)
+    REFERENCES clientes (id),
+    CONSTRAINT Fk_tiposDePrestamoId FOREIGN KEY(tiposDePrestamoId)
+    REFERENCES tiposDePrestamo (id)
+);
+create TABLE cuotas(
+    id int NOT null AUTO_INCREMENT,
+    fecha date NOT null,
+    valor double NOT null,
+    prestamoId int NOT null,
+    PRIMARY KEY (id),
+    CONSTRAINT Fk_prestamoId FOREIGN KEY(prestamoId)
+    REFERENCES prestamos (id)  
+);
