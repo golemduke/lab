@@ -50,7 +50,7 @@ create TABLE prestamos(
     REFERENCES tiposDePrestamo (id)
 );
 create TABLE cuotas(
-    id int NOT null AUTO_INCREMENT,
+    id int NOT null AUTgit O_INCREMENT,
     fecha date NOT null,
     valor double NOT null,
     prestamoId int NOT null,
